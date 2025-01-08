@@ -12,20 +12,22 @@ source:
     - belief_propagation.patch
 
 build:
-  number: 1
+  number: 2
   noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - pyspark
   run:
     - numpy
-    - python
+    - python >={{ python_min }}
     - pyspark
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - graphframes
 
